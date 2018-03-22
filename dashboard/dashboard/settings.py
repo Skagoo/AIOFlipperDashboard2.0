@@ -25,7 +25,7 @@ SECRET_KEY = '-#z5xh%r*!j4rqyv_0v_ankpc#z*99sym^-=vf2j+iqp6fi%60'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '192.168.1.100', '127.0.0.1', 'aioflipper.ddns.net']
 
 
 # Application definition

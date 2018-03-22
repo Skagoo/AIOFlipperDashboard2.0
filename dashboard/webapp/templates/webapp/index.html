@@ -1,16 +1,80 @@
-{% block content %}
-<header class="content__title">
-    <h1>Main heading</h1>
-    <small>Sub heading contents</small>
-</header>
+{% extends 'webapp/base.html' %}
+{% load humanize %}
 
-<!-- Page Contents -->
+{% block header %}
+<link rel="stylesheet" href="/static//scss/inc/widgets/_quick-stats.scss">
+{% endblock %}
+
+{% block content %}
+
+<!-- Widget QuickStats -->
+<div class="row quick-stats">
+    <div class="col-sm-6 col-md-3">
+        <div class="quick-stats__item">
+            <div class="quick-stats__info">
+                <h2>2867 M</h2>
+                <small>Total Value</small>
+            </div>
+
+            <div class="quick-stats__chart peity-bar">6,4,8,6,5,6,7,8,3,5,9</div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <div class="quick-stats__item">
+            <div class="quick-stats__info">
+                <h2>1280 M</h2>
+                <small>Cash Value</small>
+            </div>
+
+            <div class="quick-stats__chart peity-bar">4,7,6,2,5,3,8,6,6,4,8</div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <div class="quick-stats__item">
+            <div class="quick-stats__info">
+                <h2>1586 M</h2>
+                <small>Items Value</small>
+            </div>
+
+            <div class="quick-stats__chart peity-bar">4,7,6,2,5,3,8,6,6,4,8</div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-md-3">
+        <div class="quick-stats__item">
+            <div class="quick-stats__info">
+                <h2>1213</h2>
+                <small>Sales Today</small>
+            </div>
+
+            <div class="quick-stats__chart peity-bar">4,7,6,2,5,3,8,6,6,4,8</div>
+        </div>
+    </div>
+</div>
+<!-- /Widget QuickStats -->
+
+<!-- Break line -->
+<hr>
+<br>
+<!-- /Break line -->
 
 {% endblock %}
 
 {% block footer %}
-<!-- Footer -->
 <footer class="footer">
-     <!-- Footer Contents -->
+    <p>© AIOFlipper by Skagoo. All rights reserved.</p>
+
+    <ul class="nav footer__nav">
+        <a class="nav-link" href="https://github.com/">Github</a>
+
+        <a class="nav-link" href="https://stackoverflow.com/users/5530975/s-van-den-wyngaert">Stack Overflow</a>
+    </ul>
 </footer>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/demo/js/other-charts.js"></script>
+<script src="/static/vendors/bower_components/peity/jquery.peity.min.js"></script>
 {% endblock %}

@@ -1,0 +1,72 @@
+{% load l10n %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- App styles -->
+        <link rel="stylesheet" href="css/app.min.css">
+
+        <!-- Page specific css -->
+        {% block header %}
+        {% endblock %}
+        <!-- End of Page specific css -->
+    </head>
+
+    <body data-ma-theme="1">
+        <main class="main">
+
+            <!-- Header -->
+            <header class="header">
+                <div class="navigation-trigger hidden-xl-up" data-ma-action="aside-open" data-ma-target=".sidebar">
+                    <i class="zmdi zmdi-menu"></i>
+                </div>
+
+                <div class="logo hidden-sm-down">
+                    <h1><a href="index.html">Logo</a></h1>
+                </div>
+
+                <!-- Other Header Contents -->
+            </header>
+
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="scrollbar-inner">
+                   <!-- Sidebar Contents -->
+                </div>
+            </aside>
+
+            <!-- Contents -->
+            <section class="content">
+                <!-- page content -->
+                {% block content %}
+                {% endblock %}
+                <!-- /page content -->
+
+                <!-- footer content -->
+                {% block content %}
+                {% endblock %}
+                <!-- /footer content -->
+            </section>
+        </main>
+
+
+        <!-- Javascript -->
+        <!-- Vendors -->
+        <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="vendors/bower_components/popper.js/dist/umd/popper.min.js"></script>
+        <script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="vendors/bower_components/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+        <script src="vendors/bower_components/jquery-scrollLock/jquery-scrollLock.min.js"></script>
+
+        <!-- App functions -->
+        <script src="js/app.min.js"></script>
+
+        <!-- Page specific scripts -->
+        {% block scripts %}
+        {% endblock %}
+        <!-- End of Page specific scripts -->
+    </body>
+</html>

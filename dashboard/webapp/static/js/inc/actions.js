@@ -34,7 +34,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         var $this = $(this);
-        var action = $this.data('sa-action');
+        var action = $this.attr('data-sa-action');
         var target = '';
 
         switch (action) {
@@ -77,7 +77,13 @@ $(document).ready(function () {
                 Full screen browse
             ---------------------------------------------*/
             case 'fullscreen':
+                $this.attr('data-sa-action', 'exit-fullscreen');
                 launchIntoFullscreen(document.documentElement);
+                break;
+
+            case 'exit-fullscreen':
+                $this.attr('data-sa-action', 'fullscreen');
+                exitFullscreen();     
                 break;
 
 
@@ -142,5 +148,7 @@ $(document).ready(function () {
                 $(this).closest('.toolbar').find('.toolbar__search').fadeOut(200);
                 break;
         }
+
+        // $body = $('body');
     }); 
 });

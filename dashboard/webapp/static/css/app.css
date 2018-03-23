@@ -12025,6 +12025,15 @@ textarea {
   }
 }
 
+[data-sa-theme="11"] {
+  background-color: #234d6d;
+}
+@media (min-width: 576px) {
+  [data-sa-theme="11"] {
+    background-image: url("../img/bg/11.jpg");
+  }
+}
+
 .themes {
   position: fixed;
   top: 0;

@@ -208,20 +208,22 @@ $(document).ready(function() {
             text: 'AIOFlipper Profit Visualisation'
         },
 
-        series: [{
-            type: 'column',
-            name: 'Profit',
-            data: [],
-            dataGrouping: {
-                units: [[
-                    'week', // unit name
-                    [1] // allowed multiples
-                ], [
-                    'month',
-                    [1, 2, 3, 4, 6]
-                ]]
+        series: [
+            {
+                type: 'column',
+                name: 'Profit',
+                data: [],
+                dataGrouping: {
+                    units: [[
+                        'week', // unit name
+                        [1] // allowed multiples
+                    ], [
+                        'month',
+                        [1, 2, 3, 4, 6]
+                    ]]
+                }
             }
-        }]
+        ]
     };
 
     $.getJSON('/json/bar_profit_data/', function(data) {
@@ -326,219 +328,219 @@ $(document).ready(function() {
         [
             {
                 name: 'Anima Core body of Seren',
-                color: 'rgba(223, 83, 83, 0.7)',
+                color: 'rgba(223, 83, 83, 0.3)',
             },
             {
                 name: 'Anima Core body of Sliske',
-                color: 'rgba(221, 84, 85, 0.7)',
+                color: 'rgba(221, 84, 85, 0.3)',
             },
             {
                 name: 'Anima Core body of Zamorak',
-                color: 'rgba(219, 85, 87, 0.7)',
+                color: 'rgba(219, 85, 87, 0.3)',
             },
             {
                 name: 'Anima Core Body of Zaros',
-                color: 'rgba(217, 86, 89, 0.7)',
+                color: 'rgba(217, 86, 89, 0.3)',
             },
             {
                 name: 'Anima Core helm of Seren',
-                color: 'rgba(215, 88, 91, 0.7)',
+                color: 'rgba(215, 88, 91, 0.3)',
             },
             {
                 name: 'Anima Core helm of Sliske',
-                color: 'rgba(213, 89, 93, 0.7)',
+                color: 'rgba(213, 89, 93, 0.3)',
             },
             {
                 name: 'Anima Core helm of Zamorak',
-                color: 'rgba(211, 90, 95, 0.7)',
+                color: 'rgba(211, 90, 95, 0.3)',
             },
             {
                 name: 'Anima Core helm of Zaros',
-                color: 'rgba(209, 92, 97, 0.7)',
+                color: 'rgba(209, 92, 97, 0.3)',
             },
             {
                 name: 'Anima Core legs of Seren',
-                color: 'rgba(207, 93, 99, 0.7)',
+                color: 'rgba(207, 93, 99, 0.3)',
             },
             {
                 name: 'Anima Core legs of Sliske',
-                color: 'rgba(205, 94, 101, 0.7)',
+                color: 'rgba(205, 94, 101, 0.3)',
             },
             {
                 name: 'Anima Core legs of Zamorak',
-                color: 'rgba(203, 96, 103, 0.7)',
+                color: 'rgba(203, 96, 103, 0.3)',
             },
             {
                 name: 'Anima Core Legs of Zaros',
-                color: 'rgba(201, 97, 105, 0.7)',
+                color: 'rgba(201, 97, 105, 0.3)',
             },
             {
                 name: 'Armadyl boots',
-                color: 'rgba(199, 98, 107, 0.7)',
+                color: 'rgba(199, 98, 107, 0.3)',
             },
             {
                 name: 'Armadyl buckler',
-                color: 'rgba(197, 99, 109, 0.7)',
+                color: 'rgba(197, 99, 109, 0.3)',
             },
             {
                 name: 'Armadyl chainskirt',
-                color: 'rgba(195, 101, 111, 0.7)',
+                color: 'rgba(195, 101, 111, 0.3)',
             },
             {
                 name: 'Armadyl chestplate',
-                color: 'rgba(193, 102, 113, 0.7)',
+                color: 'rgba(193, 102, 113, 0.3)',
             },
             {
                 name: 'Armadyl crossbow',
-                color: 'rgba(191, 103, 115, 0.7)',
+                color: 'rgba(191, 103, 115, 0.3)',
             },
             {
                 name: 'Armadyl gloves',
-                color: 'rgba(189, 105, 117, 0.7)',
+                color: 'rgba(189, 105, 117, 0.3)',
             },
             {
                 name: 'Armadyl helmet',
-                color: 'rgba(187, 106, 119, 0.7)',
+                color: 'rgba(187, 106, 119, 0.3)',
             },
             {
                 name: 'Bandos boots',
-                color: 'rgba(185, 107, 121, 0.7)',
+                color: 'rgba(185, 107, 121, 0.3)',
             },
             {
                 name: 'Bandos chestplate',
-                color: 'rgba(183, 109, 123, 0.7)',
+                color: 'rgba(183, 109, 123, 0.3)',
             },
             {
                 name: 'Bandos gloves',
-                color: 'rgba(181, 110, 125, 0.7)',
+                color: 'rgba(181, 110, 125, 0.3)',
             },
             {
                 name: 'Bandos helmet',
-                color: 'rgba(179, 111, 127, 0.7)',
+                color: 'rgba(179, 111, 127, 0.3)',
             },
             {
                 name: 'Bandos tassets',
-                color: 'rgba(177, 112, 129, 0.7)',
+                color: 'rgba(177, 112, 129, 0.3)',
             },
             {
                 name: 'Bandos warshield',
-                color: 'rgba(175, 114, 131, 0.7)',
+                color: 'rgba(175, 114, 131, 0.3)',
             },
             {
                 name: 'Blade of Avaryss',
-                color: 'rgba(173, 115, 133, 0.7)',
+                color: 'rgba(173, 115, 133, 0.3)',
             },
             {
                 name: 'Blade of Nymora',
-                color: 'rgba(171, 116, 135, 0.7)',
+                color: 'rgba(171, 116, 135, 0.3)',
             },
             {
                 name: 'Boots of subjugation',
-                color: 'rgba(170, 118, 138, 0.7)',
+                color: 'rgba(170, 118, 138, 0.3)',
             },
             {
                 name: 'Dragon Rider lance',
-                color: 'rgba(168, 119, 140, 0.7)',
+                color: 'rgba(168, 119, 140, 0.3)',
             },
             {
                 name: 'Garb of subjugation',
-                color: 'rgba(166, 120, 142, 0.7)',
+                color: 'rgba(166, 120, 142, 0.3)',
             },
             {
                 name: 'Gloves of subjugation',
-                color: 'rgba(164, 122, 144, 0.7)',
+                color: 'rgba(164, 122, 144, 0.3)',
             },
             {
                 name: 'Gown of subjugation',
-                color: 'rgba(162, 123, 146, 0.7)',
+                color: 'rgba(162, 123, 146, 0.3)',
             },
             {
                 name: 'Hood of subjugation',
-                color: 'rgba(160, 124, 148, 0.7)',
+                color: 'rgba(160, 124, 148, 0.3)',
             },
             {
                 name: 'Off-hand Armadyl crossbow',
-                color: 'rgba(158, 125, 150, 0.7)',
+                color: 'rgba(158, 125, 150, 0.3)',
             },
             {
                 name: 'Off-hand shadow glaive',
-                color: 'rgba(156, 127, 152, 0.7)',
+                color: 'rgba(156, 127, 152, 0.3)',
             },
             {
                 name: 'Orb of the Cywir elders',
-                color: 'rgba(154, 128, 154, 0.7)',
+                color: 'rgba(154, 128, 154, 0.3)',
             },
             {
                 name: 'Pernix body',
-                color: 'rgba(152, 129, 156, 0.7)',
+                color: 'rgba(152, 129, 156, 0.3)',
             },
             {
                 name: 'Pernix boots',
-                color: 'rgba(150, 131, 158, 0.7)',
+                color: 'rgba(150, 131, 158, 0.3)',
             },
             {
                 name: 'Pernix chaps',
-                color: 'rgba(148, 132, 160, 0.7)',
+                color: 'rgba(148, 132, 160, 0.3)',
             },
             {
                 name: 'Pernix cowl',
-                color: 'rgba(146, 133, 162, 0.7)',
+                color: 'rgba(146, 133, 162, 0.3)',
             },
             {
                 name: 'Pernix gloves',
-                color: 'rgba(144, 135, 164, 0.7)',
+                color: 'rgba(144, 135, 164, 0.3)',
             },
             {
                 name: 'Shadow glaive',
-                color: 'rgba(142, 136, 166, 0.7)',
+                color: 'rgba(142, 136, 166, 0.3)',
             },
             {
                 name: 'Torva boots',
-                color: 'rgba(140, 137, 168, 0.7)',
+                color: 'rgba(140, 137, 168, 0.3)',
             },
             {
                 name: 'Torva full helm',
-                color: 'rgba(138, 138, 170, 0.7)',
+                color: 'rgba(138, 138, 170, 0.3)',
             },
             {
                 name: 'Torva gloves',
-                color: 'rgba(136, 140, 172, 0.7)',
+                color: 'rgba(136, 140, 172, 0.3)',
             },
             {
                 name: 'Torva platebody',
-                color: 'rgba(134, 141, 174, 0.7)',
+                color: 'rgba(134, 141, 174, 0.3)',
             },
             {
                 name: 'Torva platelegs',
-                color: 'rgba(132, 142, 176, 0.7)',
+                color: 'rgba(132, 142, 176, 0.3)',
             },
             {
                 name: 'Virtus boots',
-                color: 'rgba(130, 144, 178, 0.7)',
+                color: 'rgba(130, 144, 178, 0.3)',
             },
             {
                 name: 'Virtus gloves',
-                color: 'rgba(128, 145, 180, 0.7)',
+                color: 'rgba(128, 145, 180, 0.3)',
             },
             {
                 name: 'Virtus mask',
-                color: 'rgba(126, 146, 182, 0.7)',
+                color: 'rgba(126, 146, 182, 0.3)',
             },
             {
                 name: 'Virtus robe legs',
-                color: 'rgba(124, 148, 184, 0.7)',
+                color: 'rgba(124, 148, 184, 0.3)',
             },
             {
                 name: 'Virtus robe top',
-                color: 'rgba(122, 149, 186, 0.7)',
+                color: 'rgba(122, 149, 186, 0.3)',
             },
             {
                 name: 'Wand of the Cywir elders',
-                color: 'rgba(120, 150, 188, 0.7)',
+                color: 'rgba(120, 150, 188, 0.3)',
             },
             {
                 name: 'Ward of subjugation',
-                color: 'rgba(119, 152, 191, 0.7)',
+                color: 'rgba(119, 152, 191, 0.3)',
             }
         ]
     };

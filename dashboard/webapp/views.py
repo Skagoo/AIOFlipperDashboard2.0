@@ -1,6 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse, JsonResponse
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+
 
 import re
 
@@ -15,12 +19,46 @@ import couchdb
 SERVER = Server('http://127.0.0.1:5984/')
 amount_of_sales = 0
 
+def login_view(request):
+	if request.method == 'GET':
+		context = {}
+		template = loader.get_template('webapp/login.html')
+		return HttpResponse(template.render(context, request))
 
+	elif request.method == 'POST':
+		username = request.POST['username']
+		password = request.POST['password']
+		user = authenticate(username=username, password=password)
+		if user is not None:
+			print "Logging in user..."
+			login(request, user)
+			print "Successfully logged in user"
+			# Redirect to a success page.
+			try:
+				if request.GET['next']:
+					return redirect(request.GET['next'])
+				else:
+					return redirect('/')
+
+			except Exception as e:
+				return redirect('/')
+
+		else:
+			print "Failed to log in user"
+			# Return an 'invalid login' error message.
+			return redirect('/login/')
+
+def logout_view(request):
+	logout(request)
+	return redirect('/login/')
+
+@login_required
 def index(request):
 	context = {}
 	template = loader.get_template('webapp/index.html')
 	return HttpResponse(template.render(context, request))
 
+@login_required
 def tables_items(request):
 	db = SERVER['aio_flipper_items']
 	items = []
@@ -39,7 +77,7 @@ def tables_items(request):
 	template = loader.get_template('webapp/tables/items.html')
 	return HttpResponse(template.render(context, request))
 
-
+@login_required
 def json_scatter_sales_data(request):
 	# Get the items to index them
 	db = SERVER['aio_flipper_items']
@@ -87,7 +125,7 @@ def json_scatter_sales_data(request):
 
 	return JsonResponse(chart_data, safe=False)
 
-
+@login_required
 def json_bar_profit_data(request):
 	db = SERVER['aio_flipper_accounts']
 
@@ -138,11 +176,9 @@ def json_bar_profit_data(request):
 
 	chart_data.sort(key=lambda r: r[0])
 
-	for x in chart_data:
-		print x[0]
-
 	return JsonResponse(chart_data, safe=False)
 
+@login_required
 def json_widget_quickstats_data(request):
 	db = SERVER['aio_flipper_accounts']
 

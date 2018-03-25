@@ -97,6 +97,7 @@ Highcharts.theme = {
         }
     },
     credits: {
+        enabled: false,
         style: {
             color: "#666"
         }

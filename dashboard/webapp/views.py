@@ -13,6 +13,7 @@ from couchdb import Server
 import couchdb
 
 SERVER = Server('http://127.0.0.1:5984/')
+amount_of_sales = 0
 
 
 def index(request):
@@ -51,6 +52,9 @@ def json_scatter_sales_data(request):
 			sales.append(sale_fromatted)
 		except Exception as e:
 			pass
+
+	global amount_of_sales
+	amount_of_sales = len(sales)
 
 	sales.sort(key=lambda r: int(r[0]))
 
@@ -119,3 +123,23 @@ def json_bar_profit_data(request):
 		print x[0]
 
 	return JsonResponse(chart_data, safe=False)
+
+def json_widget_quickstats_data(request):
+	db = SERVER['aio_flipper_accounts']
+
+	accounts = []
+	total_value = 0
+	cash_value = 0
+	items_value = 0
+
+	for doc_id in db.view('accountsDesignDoc/getAllAccounts'):
+		accounts.append(db[str(doc_id['id'])])
+
+	for account in accounts:
+		total_value += account['totalValue']
+		cash_value += account['moneyPouchValue']
+		items_value += account['slotsValue']
+
+	quickstats_data = [total_value, cash_value, items_value, amount_of_sales]
+
+	return JsonResponse(quickstats_data, safe=False)

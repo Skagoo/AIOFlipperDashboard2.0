@@ -192,6 +192,17 @@ Highcharts.setOptions(Highcharts.theme);
 // /Highchart Style
 
 // Profit chart
+function requestProfitData() {
+    $.getJSON('/json/bar_profit_data/', function(data) {
+        profit_options.series[0]['data'] = data;
+
+        profit_chart = new Highcharts.stockChart(profit_options);
+    });
+
+    // call it again after 5 minutes
+    setTimeout(requestProfitData, 300000);
+}
+
 $(document).ready(function() {
     // create the chart
     profit_options = {
@@ -226,11 +237,7 @@ $(document).ready(function() {
         ]
     };
 
-    $.getJSON('/json/bar_profit_data/', function(data) {
-        profit_options.series[0]['data'] = data;
-
-        profit_chart = new Highcharts.stockChart(profit_options);
-    });
+    requestProfitData();
 
 });
 // /Profit chart
@@ -245,11 +252,15 @@ function requestSalesData() {
             sales_options.series[i]['data'] = data[i];
         }
 
+        // quickstats widgets
+        requestWidgetsQuickstatsData();
+        // /quickstats widgets
+
         sales_chart = new Highcharts.chart(sales_options);
     });
 
-    // call it again after one minute
-    setTimeout(requestSalesData, 60000);
+    // call it again after five minutes
+    setTimeout(requestSalesData, 300000);
 }
 
 $(document).ready(function() {
@@ -548,3 +559,29 @@ $(document).ready(function() {
     requestSalesData();
 });
 // /Sales chart
+
+
+// Widgets quickstats
+function requestWidgetsQuickstatsData() {
+    $.getJSON('/json/widget_quickstats_data/', function(data) {
+        // "quickstats-widget-total-value"
+        // "quickstats-widget-cash-value"
+        // "quickstats-widget-items-value"
+        // "quickstats-widget-sales-today"
+
+        var $element_total_value = $('#quickstats-widget-total-value h2');
+        var $element_cash_value = $('#quickstats-widget-cash-value h2');
+        var $element_items_value = $('#quickstats-widget-items-value h2');
+        var $element_sales_today = $('#quickstats-widget-sales-today h2');
+
+        $element_total_value.text(Math.round(data[0] / 1000000).toString() + ' M');
+        $element_cash_value.text(Math.round(data[1] / 1000000).toString() + ' M');
+        $element_items_value.text(Math.round(data[2] / 1000000).toString() + ' M');
+        $element_sales_today.text(data[3]);
+    });
+
+    // call it again after 5 minutes
+    // setTimeout(requestWidgetsQuickstatsData, 300000);
+    // Gets called by requestSalesData
+}
+// /Widgets quickstats

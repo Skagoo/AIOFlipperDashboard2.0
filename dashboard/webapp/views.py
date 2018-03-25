@@ -21,6 +21,25 @@ def index(request):
 	template = loader.get_template('webapp/index.html')
 	return HttpResponse(template.render(context, request))
 
+def tables_items(request):
+	db = SERVER['aio_flipper_items']
+	items = []
+
+	for doc_id in db.view('itemsDesignDoc/getAllItems'):
+		print doc_id['id']
+		items.append(db[str(doc_id['id'])])
+    
+	for item in items:
+		item['margin'] = item['currentSellPrice'] - item['currentBuyPrice']
+
+	context = {
+		'items': items,
+	}
+
+	template = loader.get_template('webapp/tables/items.html')
+	return HttpResponse(template.render(context, request))
+
+
 def json_scatter_sales_data(request):
 	# Get the items to index them
 	db = SERVER['aio_flipper_items']

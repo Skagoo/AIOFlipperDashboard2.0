@@ -26,6 +26,7 @@ $(document).ready(function () {
 
         // Initiate data-table
         $('#data-table').DataTable({
+            destroy: true,
             autoWidth: false,
             responsive: true,
             lengthMenu: [[15, 30, 45, -1], ['15 Rows', '30 Rows', '45 Rows', 'Everything']], //Length select

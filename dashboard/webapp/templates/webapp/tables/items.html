@@ -1,0 +1,78 @@
+{% extends 'webapp/base.html' %}
+{% load humanize %}
+
+{% block header %}
+<title>AIOFlipper |Tables - Items</title>
+
+<link rel="stylesheet" href="/static/scss/inc/vendor-overrides/_data-tables.scss">
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Items table</h4>
+        <h6 class="card-subtitle">This table displays all items used by the AIOFlipper to 'flip' and make profit. Data can be coppied by clicking on the cells. (price values will be coppied raw, to paste easily.)</h6>
+
+        <div class="table-responsive">
+            <table id="data-table" class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Margin</th>
+                        <th>Buy Price</th>
+                        <th>Sell Price</th>
+                        <th>Tier</th>
+                        <!-- <th>Last flipped</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+
+                {% for item in items %}
+                <tr>
+                    <td class="item_td" data-clipboard-text="{{item.name}}">{{item.name}}</td>
+                    <td class="item_td" data-clipboard-text="{{item.margin}}">{{item.margin|intcomma}}</td>
+                    <td class="item_td" data-clipboard-text="{{item.currentBuyPrice}}">{{item.currentBuyPrice|intcomma}} ({{item.currentBuyPrice}})</td>
+                    <td class="item_td" data-clipboard-text="{{item.currentSellPrice}}">{{item.currentSellPrice|intcomma}} ({{item.currentSellPrice}})</td>
+                    <td class="item_td" data-clipboard-text="{{item.tier}}">{{item.tier}}</td>
+                    <!-- <td class="item_td" data-clipboard-text="{{item.lastFlipped}}">{{item.lastFlipped}}</td> -->
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>               
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer class="footer">
+    <p>© AIOFlipper by Skagoo. All rights reserved.</p>
+
+    <!-- <ul class="nav footer__nav">
+        <a class="nav-link" href="https://github.com/"><i class="zmdi zmdi-github"></i></a>
+
+        <a class="nav-link" href="https://stackoverflow.com/users/5530975/s-van-den-wyngaert"><i class="zmdi zmdi-stackoverflow"></i></a>
+    </ul> -->
+</footer>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/vendors/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/static/vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/static/vendors/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="/static/vendors/bower_components/jszip/dist/jszip.min.js"></script>
+<script src="/static/vendors/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
+
+<!-- Clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+<!-- /Clipboard.js -->
+
+<!-- Notification -->
+<script src="/static/vendors/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js"></script>
+<!-- /Notification -->
+
+<!-- Custom Scripts -->
+<script src="/static/js/tables/items/items.js"></script>
+<!-- /Custom Scripts -->
+{% endblock %}

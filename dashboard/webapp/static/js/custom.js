@@ -280,7 +280,7 @@ $(document).ready(function() {
         xAxis: {
             title: {
                 enabled: false,
-                text: 'Height (cm)'
+                text: ''
             },
             startOnTick: true,
             endOnTick: true,
@@ -292,7 +292,7 @@ $(document).ready(function() {
         },
         yAxis: {
             title: {
-                text: 'Weight (kg)'
+                text: 'Profit (K)'
             },
             labels:
             {

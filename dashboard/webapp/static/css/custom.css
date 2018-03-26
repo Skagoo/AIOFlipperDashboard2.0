@@ -13,7 +13,7 @@
 }
 
 .groups__img {
-  width: 13.5rem !important;
+  width: 13.5rem;
   display: inline-block;
 }
 
@@ -29,7 +29,7 @@
   }
 
   .groups__img {
-    width: 4.5rem;
+    width: 6.5rem;
     display: inline-block;
   }
 }

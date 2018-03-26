@@ -147,6 +147,41 @@ $(document).ready(function () {
                 $(this).closest('.toolbar').find('.toolbar__search input').val('');
                 $(this).closest('.toolbar').find('.toolbar__search').fadeOut(200);
                 break;
+
+
+            /*------------------------------------------------
+                Accounts slots color toggle
+            -------------------------------------------------*/
+
+            // On
+            case 'toolbar-slot-colors-on':
+                $('.avatar-img').each(function() {
+                    if ($(this).attr('id') == 'slot-buying') {
+                        $(this).css("background-color", "rgba(0,255,0, 0.1)");
+                    }
+                    else if ($(this).attr('id') == 'slot-selling') {
+                        $(this).css("background-color", "rgba(255,0,0, 0.1)");
+                    }
+                    else {
+                        $(this).css("background-color", "rgba(255,255,255, 0.1)");
+                    }
+
+                    // Update the action icon
+                    $('.zmdi-invert-colors').attr("hidden", "");
+                    $('.zmdi-invert-colors-off').removeAttr("hidden");
+                });
+                break;
+
+            // Off
+            case 'toolbar-slot-colors-off':
+                $('.avatar-img').each(function() {
+                    $(this).removeAttr("style");
+
+                    // Update the action icon
+                    $('.zmdi-invert-colors').removeAttr("hidden");
+                    $('.zmdi-invert-colors-off').attr("hidden", "");
+                });
+                break;
         }
 
         // $body = $('body');

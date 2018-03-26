@@ -1,0 +1,104 @@
+{% extends 'webapp/base.html' %}
+{% load humanize %}
+
+{% block header %}
+<title>AIOFlipper |Tables - Items</title>
+
+<link rel="stylesheet" href="/static/scss/inc/vendor-overrides/_data-tables.scss">
+{% endblock %}
+
+{% block content %}
+<div class="toolbar">
+    <div class="toolbar__label">
+        {{ accounts|length }} Accounts
+    </div>
+
+    <div class="actions">
+        <i class="actions__item zmdi zmdi-search" data-sa-action="toolbar-search-open"></i>
+        <i class="actions__item zmdi zmdi-invert-colors" data-sa-action="toolbar-slot-colors-on"></i>
+        <i class="actions__item zmdi zmdi-invert-colors-off" data-sa-action="toolbar-slot-colors-off" hidden=""></i>
+    </div>
+
+    <div class="toolbar__search">
+        <input type="text" placeholder="Search...">
+
+        <i class="toolbar__search__close zmdi zmdi-long-arrow-left" data-sa-action="toolbar-search-close"></i>
+    </div>
+</div>
+
+<div class="row groups">
+    {% for account in accounts %}
+    <div class="col-xl-3 col-lg-3 col-sm-4 col-6">
+        <div class="groups__item">
+            <a href="/accounts/{{ account.username }}">
+                <div class="groups__img" style="width: 13.5rem !important;">
+                    {% for slot in account.slots %}
+                    {% if slot.slotState == 'buying' or slot.slotState == 'complete buying' %}
+                    <img class="avatar-img" src="/static/img/items/{{ slot.item.staticImageUrl }}" alt=""
+                        id="slot-buying"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        data-html="true"
+                        title="{{slot.itemName}}</br>Buying for: {{slot.value|intcomma}}</br>"
+                    >
+                    {% elif slot.slotState == 'selling' or slot.slotState == 'complete selling' %}
+                    <img class="avatar-img" src="/static/img/items/{{ slot.item.staticImageUrl }}" alt=""
+                        id="slot-selling"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        data-html="true"
+                        title="{{slot.itemName}}</br>Selling for: {{slot.value|intcomma}}</br>Bought for: {{slot.boughtFor|intcomma}}"
+                    >
+                    {% else %}
+                    <img class="avatar-img" src="" alt=""
+                        id="slot-empty"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        data-html="true"
+                        title="Empty"
+                    >
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="groups__info">
+                    <strong>{{ account.username }}</strong>
+                    <small>Slots value: {{ account.slotsValue|intcomma }}</small></br>
+                    <small>Cash value: {{ account.moneyPouchValue|intcomma }}</small></br>
+                    <small>Total value: {{ account.totalValue|intcomma }}</small>
+                </div>
+            </a>
+
+<!--             <div class="actions">
+                <div class="dropdown actions__item">
+                    <i class="zmdi zmdi-more-vert" data-toggle="dropdown"></i>
+
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="">Edit</a>
+                        <a class="dropdown-item" href="" data-demo-action="delete-listing">Delete</a>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer class="footer">
+    <p>© AIOFlipper by Skagoo. All rights reserved.</p>
+
+    <!-- <ul class="nav footer__nav">
+        <a class="nav-link" href="https://github.com/"><i class="zmdi zmdi-github"></i></a>
+
+        <a class="nav-link" href="https://stackoverflow.com/users/5530975/s-van-den-wyngaert"><i class="zmdi zmdi-stackoverflow"></i></a>
+    </ul> -->
+</footer>
+{% endblock %}
+
+{% block scripts %}
+<!-- Custom Scripts -->
+<script src="/static/js/inc/actions.js"></script>
+<!-- /Custom Scripts -->
+{% endblock %}

@@ -9,6 +9,9 @@ urlpatterns = [
 	# Item table page
 	url(r'^items/$', views.items, name='items'),
 
+	# Accounts page
+	url(r'^accounts/$', views.accounts, name='accounts'),
+
 	# Login page
 	url(r'login/$', views.login_view, name='login_view'),
 

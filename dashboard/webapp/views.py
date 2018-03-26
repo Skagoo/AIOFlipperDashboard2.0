@@ -98,6 +98,44 @@ def items(request):
 	return HttpResponse(template.render(context, request))
 
 @login_required
+def accounts(request):
+	db = SERVER['aio_flipper_accounts']
+
+	accounts = []
+
+	for doc_id in db.view('accountsDesignDoc/getAllAccounts'):
+		accounts.append(db[str(doc_id['id'])])
+
+	# Get items
+	db = SERVER['aio_flipper_items']
+	items = []
+
+	for doc_id in db.view('itemsDesignDoc/getAllItems'):
+		print doc_id['id']
+		items.append(db[str(doc_id['id'])])
+
+	# Slot images
+	for account in accounts:
+		for slot in account['slots']:
+			for item in items:
+
+				if item['name'] == slot['itemName']:
+
+					temp_str = item['itemImageUrl'].replace('\\', '/')
+					temp_str_split = temp_str.split('AIOFlipper/')[1]
+
+					item['staticImageUrl'] = temp_str_split
+					slot['item'] = item
+
+					break
+
+	context = {
+		'accounts': accounts,
+	}
+	template = loader.get_template('webapp/accounts.html')
+	return HttpResponse(template.render(context, request))
+
+@login_required
 def json_scatter_sales_data(request):
 	# Get the items to index them
 	db = SERVER['aio_flipper_items']

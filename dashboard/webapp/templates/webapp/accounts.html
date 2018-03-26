@@ -31,7 +31,7 @@
 <div class="row groups">
     {% for account in accounts %}
     <div class="col-xl-3 col-lg-3 col-sm-4 col-6">
-        <div class="groups__item">
+        <div class="groups__item" style="padding-bottom: 0rem;">
             <a href="/accounts/{{ account.username }}">
                 <div class="groups__img">
                     {% for slot in account.slots %}
@@ -71,16 +71,25 @@
                 </div>
             </a>
 
-<!--             <div class="actions">
-                <div class="dropdown actions__item">
-                    <i class="zmdi zmdi-more-vert" data-toggle="dropdown"></i>
+            </br>
 
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="">Edit</a>
-                        <a class="dropdown-item" href="" data-demo-action="delete-listing">Delete</a>
-                    </div>
-                </div>
-            </div> -->
+            <div class="progress">
+                <div class="progress-bar"
+                role="progressbar"
+                {% if account.totalValueGoalProgress == 100 %}
+                style="width: {{ account.totalValueGoalProgress }}%; background-color: rgba(0,255,0,0.5);"
+                {% else %}
+                style="width: {{ account.totalValueGoalProgress }}%; background-color: rgba(255,255,255,0.5);"
+                {% endif %}  
+                aria-valuenow="{{ account.totalValueGoalProgress }}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                data-toggle="tooltip"
+                data-placement="top"
+                data-html="true"
+                title="{{account.totalValue|intcomma}} / 500,000,000"></div>
+            </div>
+
         </div>
     </div>
     {% endfor %}

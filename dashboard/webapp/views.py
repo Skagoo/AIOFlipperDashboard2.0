@@ -19,6 +19,9 @@ import couchdb
 SERVER = Server('http://127.0.0.1:5984/')
 amount_of_sales = 0
 
+def percentage(part, whole):
+	return 100 * float(part)/float(whole)
+
 def login_view(request):
 	if request.method == 'GET':
 		context = {}
@@ -116,6 +119,9 @@ def accounts(request):
 
 	# Slot images
 	for account in accounts:
+		# Total value progress bar
+		account['totalValueGoalProgress'] = "%.0f" % percentage(account['totalValue'], 500000000)
+
 		for slot in account['slots']:
 			for item in items:
 

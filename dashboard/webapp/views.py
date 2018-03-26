@@ -60,6 +60,7 @@ def index(request):
 
 @login_required
 def tables_items(request):
+	# Get the item data
 	db = SERVER['aio_flipper_items']
 	items = []
 
@@ -69,6 +70,25 @@ def tables_items(request):
     
 	for item in items:
 		item['margin'] = item['currentSellPrice'] - item['currentBuyPrice']
+
+
+	# Get the accounts to collect last bought data
+	db = SERVER['aio_flipper_accounts']
+
+	accounts = []
+
+	for doc_id in db.view('accountsDesignDoc/getAllAccounts'):
+		accounts.append(db[str(doc_id['id'])])
+
+	for account in accounts:
+		for item_last_bought in account['lastItemBuys']:
+			for item in items:
+				if item['name'] == item_last_bought.split(';')[0]:
+					if 'lastBought' in item:
+						if item['lastBought'] < item_last_bought.split(';')[1]:
+							item['lastBought'] = item_last_bought.split(';')[1]
+					else:
+						item['lastBought'] = item_last_bought.split(';')[1]
 
 	context = {
 		'items': items,
@@ -175,6 +195,40 @@ def json_bar_profit_data(request):
 			pass
 
 	chart_data.sort(key=lambda r: r[0])
+
+	return JsonResponse(chart_data, safe=False)
+
+@login_required
+def json_bar_profit_data_today(request):
+	db = SERVER['aio_flipper_accounts']
+
+	accounts = []
+	total_value = 0
+	profit_today = 0
+	total_profit_all_accounts = 0
+	amount_of_zero_profit_days = 0
+
+	for doc_id in db.view('accountsDesignDoc/getAllAccounts'):
+		accounts.append(db[str(doc_id['id'])])
+
+	for account in accounts:
+		total_value += account['totalValue']
+
+	db = SERVER['aio_flipper_profit_tracker']
+
+	chart_data = []
+
+	# today
+	doc_id_today = "values-" + arrow.now().format('YYYY-MM-DD')
+
+	if doc_id_today in db:
+		profit_doc = db[doc_id_today]
+		profit_today = total_value - profit_doc['startingTotalValue']
+
+		epoch = int(round((int(time.mktime(time.strptime((doc_id_today.split('values-')[1] + ' 00:00:00'), '%Y-%m-%d %H:%M:%S'))) - time.timezone) * 1000))
+
+		chart_data.append([epoch , int(profit_today)])
+	# end of today
 
 	return JsonResponse(chart_data, safe=False)
 

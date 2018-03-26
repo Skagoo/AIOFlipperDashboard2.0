@@ -22,7 +22,7 @@
                         <th>Buy Price</th>
                         <th>Sell Price</th>
                         <th>Tier</th>
-                        <!-- <th>Last flipped</th> -->
+                        <th>Last flipped</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,7 +34,7 @@
                     <td class="item_td" data-clipboard-text="{{item.currentBuyPrice}}">{{item.currentBuyPrice|intcomma}} ({{item.currentBuyPrice}})</td>
                     <td class="item_td" data-clipboard-text="{{item.currentSellPrice}}">{{item.currentSellPrice|intcomma}} ({{item.currentSellPrice}})</td>
                     <td class="item_td" data-clipboard-text="{{item.tier}}">{{item.tier}}</td>
-                    <!-- <td class="item_td" data-clipboard-text="{{item.lastFlipped}}">{{item.lastFlipped}}</td> -->
+                    <td class="item_td" data-clipboard-text="{{item.lastBought}}">{{item.lastBought}}</td>
                 </tr>
                 {% endfor %}
 

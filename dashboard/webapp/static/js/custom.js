@@ -199,9 +199,19 @@ function requestProfitData() {
 
         profit_chart = new Highcharts.stockChart(profit_options);
     });
+}
 
-    // call it again after 5 minutes
-    setTimeout(requestProfitData, 300000);
+function requestProfitDataToday() {
+    $.getJSON('/json/bar_profit_data_today/', function(data) {
+        var profit_chart_copy = profit_chart;
+        var new_data = profit_chart_copy.series[0]['data'];
+        new_data[new_data.length - 1] = data[0];
+        profit_chart_copy.series[0].setData(new_data, true);
+
+        profit_chart.destroy();
+        profit_chart = profit_chart_copy;
+        profit_chart.redraw();
+    });
 }
 
 $(document).ready(function() {
@@ -209,7 +219,12 @@ $(document).ready(function() {
     profit_options = {
         chart: {
             renderTo: 'profit-chart',
-            alignTicks: false
+            alignTicks: false,
+            // events: {
+            //     load: function () {
+            //         setInterval(requestProfitDataToday, 10000);
+            //     }
+            // }
         },
 
         rangeSelector: {

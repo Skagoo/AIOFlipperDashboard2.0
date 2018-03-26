@@ -140,13 +140,13 @@
                    <!-- Sidebar Contents -->
                     <ul class="navigation">
 
-                        <li class="navigation__active"><a href="/"><i class="zmdi zmdi-home"></i> Home</a></li>
+                        <li class="homeactive"><a href="/"><i class="zmdi zmdi-home"></i> Home</a></li>
 
-                        <li class="@@exchangechartsactive"><a href="/"><i class="zmdi zmdi-trending-up"></i> Exchange charts</a></li>
+                        <li class="exchangechartsactive"><a href="/"><i class="zmdi zmdi-trending-up"></i> Exchange charts</a></li>
 
-                        <li class="@@accountsactive"><a href="/accounts/"><i class="zmdi zmdi-accounts"></i> Accounts</a></li>
+                        <li class="accountsactive"><a href="/accounts/"><i class="zmdi zmdi-accounts"></i> Accounts</a></li>
 
-                        <li class="@@itemsactive"><a href="/items/"><i class="zmdi zmdi-label-alt"></i> Items</a></li>
+                        <li class="itemsactive"><a href="/items/"><i class="zmdi zmdi-label-alt"></i> Items</a></li>
 
                     </ul>
                     
@@ -234,6 +234,10 @@
         <script src="/static/vendors/bower_components/jquery.scrollbar/jquery.scrollbar.min.js"></script>
         <script src="/static/vendors/bower_components/jquery-scrollLock/jquery-scrollLock.min.js"></script>
         <!-- /Vendors -->
+
+        <!-- Navigation -->
+        <script src="/static/js/navigation.js"></script>
+        <!-- /Navigation -->
 
         <!-- Page specific scripts -->
         {% block scripts %}

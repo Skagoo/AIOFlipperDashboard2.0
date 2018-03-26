@@ -59,7 +59,7 @@ def index(request):
 	return HttpResponse(template.render(context, request))
 
 @login_required
-def tables_items(request):
+def items(request):
 	# Get the item data
 	db = SERVER['aio_flipper_items']
 	items = []
@@ -94,7 +94,7 @@ def tables_items(request):
 		'items': items,
 	}
 
-	template = loader.get_template('webapp/tables/items.html')
+	template = loader.get_template('webapp/items.html')
 	return HttpResponse(template.render(context, request))
 
 @login_required

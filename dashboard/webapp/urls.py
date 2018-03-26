@@ -7,7 +7,7 @@ urlpatterns = [
 	url(r'^$', views.index, name='index'),
 
 	# Item table page
-	url(r'^tables/items/$', views.tables_items, name='tables_items'),
+	url(r'^items/$', views.items, name='items'),
 
 	# Login page
 	url(r'login/$', views.login_view, name='login_view'),

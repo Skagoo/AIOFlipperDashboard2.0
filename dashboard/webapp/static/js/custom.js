@@ -4,6 +4,8 @@ var sales_chart;
 var profit_chart;
 var profit_options;
 
+var date_picker_initialized = false;
+
 // Highchart Style
 Highcharts.theme = {
     colors:"#2b908f #90ee7e #f45b5b #7798BF #aaeeee #ff0066 #eeaaee #55BF3B #DF5353 #7798BF #aaeeee".split(" "),
@@ -239,6 +241,7 @@ $(document).ready(function() {
             {
                 type: 'column',
                 name: 'Profit',
+                color: 'rgba(119, 152, 191, 0.7)',
                 data: [],
                 dataGrouping: {
                     units: [[
@@ -273,6 +276,12 @@ function requestSalesData() {
         // /quickstats widgets
 
         sales_chart = new Highcharts.chart(sales_options);
+
+        // Initialize DatePicker if not already
+        if (!date_picker_initialized) {
+            initializeDatePicker();
+            date_picker_initialized = true;
+        }
     });
 
     // call it again after five minutes
@@ -291,7 +300,8 @@ $(document).ready(function() {
             text: 'Item sales by Item'
         },
         subtitle: {
-            text: 'Today',
+            useHTML: true,
+            text: '<div class="input-group"><div class="form-group"><input type="text" class="form-control date-picker" placeholder="Pick a date" style=text-align:center;><i class="form-group__bar"></i></div></div>',
         },
         xAxis: {
             title: {
@@ -601,3 +611,17 @@ function requestWidgetsQuickstatsData() {
     // Gets called by requestSalesData
 }
 // /Widgets quickstats
+
+// Profit chart DatePicker
+function initializeDatePicker() {
+    if($('.date-picker')[0]) {
+        $('.date-picker').flatpickr({
+            enableTime: false,
+            defaultDate: 'today',
+            dateFormat: "Y-m-d",
+            nextArrow: '<i class="zmdi zmdi-long-arrow-right" />',
+            prevArrow: '<i class="zmdi zmdi-long-arrow-left" />'
+        });
+    }
+}
+// /Profit chart DatePicker

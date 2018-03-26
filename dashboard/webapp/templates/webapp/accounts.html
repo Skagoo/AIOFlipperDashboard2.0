@@ -32,7 +32,8 @@
     {% for account in accounts %}
     <div class="col-xl-3 col-lg-3 col-sm-4 col-6">
         <div class="groups__item" style="padding-bottom: 0rem;">
-            <a href="/accounts/{{ account.username }}">
+            <!-- <a href="/accounts/{{ account.username }}"> -->
+            <a>
                 <div class="groups__img">
                     {% for slot in account.slots %}
                     {% if slot.slotState == 'buying' or slot.slotState == 'complete buying' %}

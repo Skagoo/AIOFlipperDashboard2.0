@@ -11028,6 +11028,11 @@ textarea {
   .groups .groups__item {
     margin-bottom: 10px;
   }
+
+  .groups__img {
+    width: 0.1rem;
+    display: inline-block;
+  }
 }
 
 .groups__item {

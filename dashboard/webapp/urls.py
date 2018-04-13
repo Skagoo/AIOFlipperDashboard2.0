@@ -23,4 +23,7 @@ urlpatterns = [
 	url(r'^json/bar_profit_data/$', views.json_bar_profit_data, name='json_bar_profit_data'),
 	url(r'^json/bar_profit_data_today/$', views.json_bar_profit_data_today, name='json_bar_profit_data_today'),
 	url(r'^json/widget_quickstats_data/$', views.json_widget_quickstats_data, name='json_widget_quickstats_data'),
+
+	# Ajax
+	url(r'^ajax/update_item/$', views.ajax_update_item, name='ajax_update_item'),
 ]

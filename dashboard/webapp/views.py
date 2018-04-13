@@ -22,6 +22,17 @@ amount_of_sales = 0
 def percentage(part, whole):
 	return 100 * float(part)/float(whole)
 
+def get_notification_data():
+	db = SERVER['aio_flipper_accounts']
+
+	accounts = []
+
+	for doc_id in db.view('accountsDesignDoc/getAllAccounts'):
+		accounts.append(db[str(doc_id['id'])])
+
+	for account in accounts:
+		account['memberUntil']
+
 def login_view(request):
 	if request.method == 'GET':
 		context = {}
@@ -121,6 +132,9 @@ def accounts(request):
 	for account in accounts:
 		# Total value progress bar
 		account['totalValueGoalProgress'] = "%.0f" % percentage(account['totalValue'], 500000000)
+		# Member until formatting
+		account['memberUntilDate'] = account['memberUntil'].split('T')[0]
+		account['memberUntilTime'] = account['memberUntil'].split('T')[1].split('.')[0]
 
 		for slot in account['slots']:
 			for item in items:
@@ -218,7 +232,7 @@ def json_bar_profit_data(request):
 		profit_doc = db[doc_id_today]
 		profit_today = total_value - profit_doc['startingTotalValue']
 
-		epoch = int(round((int(time.mktime(time.strptime((doc_id_today.split('values-')[1] + ' 00:00:00'), '%Y-%m-%d %H:%M:%S'))) - time.timezone) * 1000))
+		epoch = int(round((int(time.mktime(time.strptime((doc_id_today.split('values-')[1] + ' 00:00:00'), '%Y-%m-%d %H:%M:%S'))) - time.altzone) * 1000))
 
 		chart_data.append([epoch , int(profit_today)])
 	# end of today
@@ -231,7 +245,7 @@ def json_bar_profit_data(request):
 				profit_doc = db[i]
 				profit = int(profit_doc['endingTotalValue'] - profit_doc['startingTotalValue'])
 
-				epoch = int(round((int(time.mktime(time.strptime((i.split('values-')[1] + ' 00:00:00'), '%Y-%m-%d %H:%M:%S'))) - time.timezone) * 1000))
+				epoch = int(round((int(time.mktime(time.strptime((i.split('values-')[1] + ' 00:00:00'), '%Y-%m-%d %H:%M:%S'))) - time.altzone) * 1000))
 
 				chart_data.append([epoch , profit])
 
@@ -296,3 +310,22 @@ def json_widget_quickstats_data(request):
 	quickstats_data = [total_value, cash_value, items_value, amount_of_sales]
 
 	return JsonResponse(quickstats_data, safe=False)
+
+@login_required
+def ajax_update_item(request):
+	# Get the item data
+	item_name = request.GET.get('item_name', None)
+	item_buy_price = request.GET.get('item_buy_price', None)
+	item_sell_price = request.GET.get('item_sell_price', None)
+
+	# Get the item doc
+	db = SERVER['aio_flipper_items']
+	item = db[item_name]
+
+	# Update the item
+	item['currentBuyPrice'] = int(item_buy_price)
+	item['currentSellPrice'] = int(item_sell_price)
+
+	db.save(item)
+
+	return JsonResponse({'success': True}, safe=False)

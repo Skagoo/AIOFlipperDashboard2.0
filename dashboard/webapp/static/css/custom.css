@@ -33,3 +33,22 @@
     display: inline-block;
   }
 }
+
+
+.btn-trans {
+  background-color: transparent;
+  color: #ffffff;
+}
+.btn-trans:hover {
+  background-color: rgba(0, 0, 0, 0.35);
+  background-image: none;
+  color: #ffffff;
+  cursor: pointer;
+}
+.btn-trans:active, .btn-trans.active, .show > .btn-trans.dropdown-toggle {
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}

@@ -5,6 +5,11 @@
 <title>AIOFlipper |Tables - Items</title>
 
 <link rel="stylesheet" href="/static/scss/inc/vendor-overrides/_data-tables.scss">
+<link rel="stylesheet" href="/static/scss/inc/bootstrap-overrides/_modal.scss">
+
+<!-- Alert -->
+<link rel="stylesheet" href="/static/vendors/bower_components/sweetalert2/dist/sweetalert2.min.css">
+<!-- /Alert -->
 {% endblock %}
 
 {% block content %}
@@ -23,6 +28,7 @@
                         <th>Sell Price</th>
                         <th>Tier</th>
                         <th>Last flipped</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +41,7 @@
                     <td class="item_td" data-clipboard-text="{{item.currentSellPrice}}">{{item.currentSellPrice|intcomma}} ({{item.currentSellPrice}})</td>
                     <td class="item_td" data-clipboard-text="{{item.tier}}">{{item.tier}}</td>
                     <td class="item_td" data-clipboard-text="{{item.lastBought}}">{{item.lastBought}}</td>
+                    <td class="item_td"><button class="btn btn-trans btn--icon" onclick="editItemTableRow(this)"><i class="zmdi zmdi-edit"></i></button></td>
                 </tr>
                 {% endfor %}
 
@@ -71,6 +78,10 @@
 <!-- Notification -->
 <script src="/static/vendors/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js"></script>
 <!-- /Notification -->
+
+<!-- Alert -->
+<script src="/static/vendors/bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
+<!-- /Alert -->
 
 <!-- Custom Scripts -->
 <script src="/static/js/items.js"></script>

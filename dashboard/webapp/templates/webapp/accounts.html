@@ -42,7 +42,7 @@
                         data-toggle="tooltip"
                         data-placement="top"
                         data-html="true"
-                        title="{{slot.itemName}}</br>Buying for: {{slot.value|intcomma}}</br>"
+                        title="{{slot.itemName}}</br>Buying for: {{slot.value|intcomma}}</br>Adjustment rule: RX{{slot.pricingRule}}"
                     >
                     {% elif slot.slotState == 'selling' or slot.slotState == 'complete selling' %}
                     <img class="avatar-img" src="/static/img/items/{{ slot.item.staticImageUrl }}" alt=""
@@ -50,7 +50,7 @@
                         data-toggle="tooltip"
                         data-placement="top"
                         data-html="true"
-                        title="{{slot.itemName}}</br>Selling for: {{slot.value|intcomma}}</br>Bought for: {{slot.boughtFor|intcomma}}"
+                        title="{{slot.itemName}}</br>Selling for: {{slot.value|intcomma}}</br>Bought for: {{slot.boughtFor|intcomma}}}</br>Adjustment rule: RX{{slot.pricingRule}}"
                     >
                     {% else %}
                     <img class="avatar-img" src="" alt=""
@@ -66,6 +66,13 @@
 
                 <div class="groups__info">
                     <strong>{{ account.username }}</strong>
+                    <small
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        data-html="true"
+                        title="Member until {{ account.memberUntilDate }}</br> {{ account.memberUntilTime }}">
+                        Member: {{ account.memberUntilDate }}
+                    </small></br>
                     <small>Slots value: {{ account.slotsValue|intcomma }}</small></br>
                     <small>Cash value: {{ account.moneyPouchValue|intcomma }}</small></br>
                     <small>Total value: {{ account.totalValue|intcomma }}</small>
@@ -91,6 +98,17 @@
                 title="{{account.totalValue|intcomma}} / 500,000,000"></div>
             </div>
 
+            <div class="actions">
+                <div class="dropdown actions__item">
+                    <i class="zmdi zmdi-more-vert" data-toggle="dropdown"></i>
+
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" data-clipboard-text="{{account.email}}">Copy Username</a>
+                        <a class="dropdown-item" data-clipboard-text="{{account.password}}">Copy Password</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     {% endfor %}
@@ -110,7 +128,17 @@
 {% endblock %}
 
 {% block scripts %}
+<!-- Clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+<!-- /Clipboard.js -->
+
+<!-- Notification -->
+<script src="/static/vendors/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js"></script>
+<!-- /Notification -->
+
 <!-- Custom Scripts -->
+<script src="/static/js/accounts.js"></script>
+
 <script src="/static/js/inc/actions.js"></script>
 <!-- /Custom Scripts -->
 {% endblock %}

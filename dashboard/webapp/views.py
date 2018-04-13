@@ -26,12 +26,19 @@ def get_notification_data():
 	db = SERVER['aio_flipper_accounts']
 
 	accounts = []
+	notifications = []
 
 	for doc_id in db.view('accountsDesignDoc/getAllAccounts'):
 		accounts.append(db[str(doc_id['id'])])
 
 	for account in accounts:
-		account['memberUntil']
+		time_remaining = arrow.get(account['memberUntil'].split('.')[0].replace('T', ' '), 'YYYY-MM-DD HH:mm:ss') - arrow.get(arrow.now().format('YYYY-MM-DD HH:mm:ss'))
+		time_remaining_48h = arrow.get(arrow.now().shift(days=+2).format('YYYY-MM-DD HH:mm:ss')) - arrow.get(arrow.now().format('YYYY-MM-DD HH:mm:ss'))
+		
+		if time_remaining <= time_remaining_48h:
+			notifications.append({'username': account['username'], 'timeRemaining': time_remaining})
+
+	return notifications
 
 def login_view(request):
 	if request.method == 'GET':
@@ -68,7 +75,8 @@ def logout_view(request):
 
 @login_required
 def index(request):
-	context = {}
+	notification_data = get_notification_data()
+	context = {'notification_data': notification_data}
 	template = loader.get_template('webapp/index.html')
 	return HttpResponse(template.render(context, request))
 

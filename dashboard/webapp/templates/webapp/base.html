@@ -79,33 +79,16 @@
 
                             <div class="listview listview--hover">
                                 <div class="listview__scroll scrollbar-inner">
-                                    <a href="" class="listview__item">
-                                        <div class="listview__content">
-                                            <div class="listview__heading">Aderared</div>
-                                            <p>Membership will expire in 34 hours.</p>
-                                        </div>
-                                    </a>
 
+                                    {% for notification in notification_data %}
                                     <a href="" class="listview__item">
                                         <div class="listview__content">
-                                            <div class="listview__heading">Gworeg</div>
-                                            <p>Membership will expire in 16 hours.</p>
+                                            <div class="listview__heading">{{ notification.username }}</div>
+                                            <p>Membership will expire in {{ notification.timeRemaining }} hours.</p>
                                         </div>
                                     </a>
+                                    {% endfor %}
 
-                                    <a href="" class="listview__item">
-                                        <div class="listview__content">
-                                            <div class="listview__heading">HipHipHipKip</div>
-                                            <p>Membership will expire in 28 hours.</p>
-                                        </div>
-                                    </a>
-
-                                    <a href="" class="listview__item">
-                                        <div class="listview__content">
-                                            <div class="listview__heading">WM MW</div>
-                                            <p>Membership will expire in 19 hours.</p>
-                                        </div>
-                                    </a>
                                 </div>
 
                                 <div class="p-1"></div>
@@ -245,6 +228,8 @@
         <!-- /Page specific scripts -->
 
         <!-- App functions -->
+        <script src="/static/js/base.js"></script>
+
         <script src="/static/js/app.min.js"></script>
         <!-- /App functions -->
         <!-- /Javascript -->
